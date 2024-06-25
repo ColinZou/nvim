@@ -18,3 +18,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.cmd("set nobomb")
   end,
 })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "yaml", "yml" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
