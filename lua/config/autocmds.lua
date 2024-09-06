@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "yaml", "yml" },
+  pattern = { "yaml", "yml", "cs", "xml" },
   callback = function()
     vim.b.autoformat = false
   end,

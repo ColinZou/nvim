@@ -3,4 +3,5 @@
 -- Add any additional options here
 local opt = vim.opt
 opt.bomb = false
+vim.g.autoformat = false
 vim.api.nvim_set_option("clipboard", "unnamed")
