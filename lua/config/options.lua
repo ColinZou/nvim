@@ -4,7 +4,7 @@
 local opt = vim.opt
 opt.bomb = false
 local disable_format = os.getenv("NVIM_DISABLE_AUTO_FORMAT")
-if not disable_format == nil then
+if not (disable_format == nil) then
   vim.g.autoformat = false
 end
 vim.g.shfmt_fmt_on_save = 0

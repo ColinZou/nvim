@@ -19,9 +19,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "*", "*.*" },
   callback = function()
     if vim.g.autoformat == false then
+      local buf = vim.api.nvim_get_current_buf()
+      if (buf == nil) or (buf == 0) then
+        return
+      end
       vim.b.autoformat = false
+      vim.b[buf].autoformat = false
     end
   end,
 })
