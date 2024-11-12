@@ -8,4 +8,7 @@ if not (disable_format == nil) then
   vim.g.autoformat = false
 end
 vim.g.shfmt_fmt_on_save = 0
+vim.wo.wrap = true
+vim.wo.linebreak = true
+vim.wo.list = false
 vim.api.nvim_set_option("clipboard", "unnamed")
