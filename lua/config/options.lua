@@ -11,4 +11,5 @@ vim.g.shfmt_fmt_on_save = 0
 vim.wo.wrap = true
 vim.wo.linebreak = true
 vim.wo.list = false
+vim.wo.relativenumber = false
 vim.api.nvim_set_option_value("clipboard", "unnamed", { scope = "global" })
