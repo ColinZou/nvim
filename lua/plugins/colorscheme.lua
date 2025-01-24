@@ -2,9 +2,9 @@ return {
   "folke/tokyonight.nvim",
   lazy = false,
   opts = {
-    style = "night",
+    style = "moon",
     on_colors = function(colors)
-      colors.border = "#565f89"
+      colors.border = "orange"
     end,
   },
 }
