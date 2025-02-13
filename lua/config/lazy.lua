@@ -60,12 +60,13 @@ lspconfig.helm_ls.setup({
 })
 lspconfig.yamlls.setup({})
 
-lspconfig["omnisharp"].setup({
-  on_attach = function(client, bufnr)
-    -- Disable highlighting as it can be slow
-    local large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
-    if not large_project_mode == nil then
+-- setup omnisharp
+local large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
+if not large_project_mode == nil then
+  lspconfig["omnisharp"].setup({
+    on_attach = function(client, bufnr)
+      -- Disable highlighting as it can be slow
       client.server_capabilities.semanticTokensProvider = nil
-    end
-  end,
-})
+    end,
+  })
+end
