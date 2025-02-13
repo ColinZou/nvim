@@ -5,3 +5,5 @@ if vim.g.autoformat == false then
   vim.keymap.del("v", "<leader>cf")
   vim.keymap.set("v", "<leader>cf", vim.lsp.buf.format, { silent = true, noremap = true })
 end
+vim.keymap.set("v", "<leader>ca", vim.lsp.buf.code_action, { silent = false, noremap = true })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = false, noremap = true })

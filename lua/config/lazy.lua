@@ -15,8 +15,6 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
-    { import = "lazyvim.plugins.extras.lang.java" },
-    { import = "lazyvim.plugins.extras.lang.omnisharp" },
     { import = "plugins" },
   },
   defaults = {
@@ -48,6 +46,7 @@ require("lazy").setup({
 })
 
 local lspconfig = require("lspconfig")
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- setup helm-ls
 lspconfig.helm_ls.setup({
   settings = {
@@ -57,16 +56,34 @@ lspconfig.helm_ls.setup({
       },
     },
   },
+  capabilities = lsp_capabilities,
 })
-lspconfig.yamlls.setup({})
+lspconfig.yamlls.setup({
+  capabilities = lsp_capabilities,
+})
 
--- setup omnisharp
-local large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
-if not large_project_mode == nil then
-  lspconfig["omnisharp"].setup({
-    on_attach = function(client, bufnr)
-      -- Disable highlighting as it can be slow
-      client.server_capabilities.semanticTokensProvider = nil
-    end,
-  })
+local omnisharp_bin = os.getenv("OMNISHARP_BIN")
+if omnisharp_bin == nil then
+  -- setup omnisharp
+  omnisharp_bin = os.getenv("HOME") .. "/bin/omnisharp/OmniSharp.dll"
 end
+local dotnet_bin = os.getenv("DOTNET_BIN")
+if dotnet_bin == nil then
+  -- setup dotnet
+  dotnet_bin = "dotnet"
+end
+-- setup omnisharp
+--lspconfig["omnisharp"].setup({
+--  on_attach = function(client, bufnr)
+--    local large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
+--    if not large_project_mode == nil then
+--      -- Disable highlighting as it can be slow
+--      client.server_capabilities.semanticTokensProvider = nil
+--    end
+--  end,
+--  cmd = {
+--    dotnet_bin,
+--    omnisharp_bin,
+--  },
+--  capabilities = lsp_capabilities,
+--})
