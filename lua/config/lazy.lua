@@ -5,16 +5,20 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+local copilot_enabled_env = os.getenv("NVIM_COPILOT_ENABLED")
+local copilot_enable_options = {}
+if copilot_enabled_env == "YES" then
+  copilot_enable_options = { import = "lazyvim.plugins.extras.ai.copilot" }
+end
 
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
+    copilot_enable_options,
     { import = "plugins" },
   },
   defaults = {
