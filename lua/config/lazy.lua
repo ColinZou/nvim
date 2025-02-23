@@ -66,6 +66,7 @@ lspconfig.yamlls.setup({
   capabilities = lsp_capabilities,
 })
 
+--setup omnisharp
 local omnisharp_bin = os.getenv("OMNISHARP_BIN")
 if omnisharp_bin == nil then
   -- setup omnisharp
@@ -76,18 +77,17 @@ if dotnet_bin == nil then
   -- setup dotnet
   dotnet_bin = "dotnet"
 end
--- setup omnisharp
---lspconfig["omnisharp"].setup({
---  on_attach = function(client, bufnr)
---    local large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
---    if not large_project_mode == nil then
---      -- Disable highlighting as it can be slow
---      client.server_capabilities.semanticTokensProvider = nil
---    end
---  end,
---  cmd = {
---    dotnet_bin,
---    omnisharp_bin,
---  },
---  capabilities = lsp_capabilities,
---})
+local omnisharp_large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
+if not omnisharp_large_project_mode == nil then
+  lspconfig["omnisharp"].setup({
+    on_attach = function(client, bufnr)
+      -- Disable highlighting as it can be slow
+      client.server_capabilities.semanticTokensProvider = nil
+    end,
+    cmd = {
+      dotnet_bin,
+      omnisharp_bin,
+    },
+    capabilities = lsp_capabilities,
+  })
+end
