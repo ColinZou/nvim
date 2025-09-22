@@ -7,3 +7,6 @@ if vim.g.autoformat == false then
 end
 vim.keymap.set("v", "<leader>ca", vim.lsp.buf.code_action, { silent = false, noremap = true })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = false, noremap = true })
+vim.keymap.set("n", "<leader>fl", function()
+  vim.cmd("Outline")
+end, { silent = false, noremap = true })
