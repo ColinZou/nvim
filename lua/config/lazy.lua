@@ -65,28 +65,11 @@ lspconfig.helm_ls.setup({
 lspconfig.yamlls.setup({
   capabilities = lsp_capabilities,
 })
---setup omnisharp
---local omnisharp_bin = os.getenv("OMNISHARP_BIN")
---if omnisharp_bin == nil then
---  -- setup omnisharp
---  omnisharp_bin = os.getenv("HOME") .. "/bin/omnisharp/OmniSharp.dll"
---end
---local dotnet_bin = os.getenv("DOTNET_BIN")
---if dotnet_bin == nil then
---  -- setup dotnet
---  dotnet_bin = "dotnet"
---end
---local omnisharp_large_project_mode = os.getenv("NVIM_HUGE_CSHARP_PROJ")
---if not omnisharp_large_project_mode == nil then
---  lspconfig["omnisharp"].setup({
---    on_attach = function(client, bufnr)
---      -- Disable highlighting as it can be slow
---      client.server_capabilities.semanticTokensProvider = nil
---    end,
---    cmd = {
---      dotnet_bin,
---      omnisharp_bin,
---    },
---    capabilities = lsp_capabilities,
---  })
---end
+vim.lsp.config("roslyn", {
+  capabilities = lsp_capabilities,
+  settings = {
+    -- This may not reliably set the C# language version, as it's
+    -- typically controlled by project files.
+    ["csharp|langversion"] = "12.0",
+  },
+})
