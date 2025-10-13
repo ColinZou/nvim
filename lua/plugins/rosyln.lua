@@ -4,6 +4,7 @@ return {
   opts = {
     filewatching = "roslyn",
     broad_search = true,
+    silent = false,
   },
   init = function()
     vim.keymap.set("n", "<leader>ds", function()

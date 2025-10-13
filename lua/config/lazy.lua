@@ -70,8 +70,11 @@ vim.lsp.config("roslyn", {
   capabilities = lsp_capabilities,
   settings = {
     ["csharp"] = {
-      language_version = "9.0",
-      lang_version = "9.0",
+      language_version = "12.0",
+      lang_version = "12.0",
+    },
+    ["csharp|formatting"] = {
+      dotnet_organize_imports_on_format = true,
     },
     ["csharp|code_lens"] = {
       dotnet_enable_references_code_lens = true,
